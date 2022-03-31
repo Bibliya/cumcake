@@ -1,0 +1,7 @@
+{
+  "name": "cumcake",
+  "description": "Access the screenshare nitro perk for free.",
+  "author": "Cumcordians",
+  "file": "src/index.js",
+  "license": "MIT"
+}
