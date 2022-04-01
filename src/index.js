@@ -1,27 +1,19 @@
 import { findByProps } from "@cumcord/modules/webpack";
-import { log } from '@cumcord/utils/logger';
-
-const Window = window._;
-const Stream = findByProps('ApplicationStreamFPSButtons');
+import { log } from "@cumcord/utils/logger";
 
 export default () => {
-    return {
-      onLoad() {
-        const requirements = Stream.ApplicationStreamSettingRequirements;
-        this.original = Window.cloneDeep(requirements);
+  let stream = cumcord.modules.webpack.findByProps("ApplicationStreamFPSButtons");
+  let original = stream.ApplicationStreamSettingRequirements;
 
-        for (let i = 0; i < requirements.length; i++) {
-            for (const key in requirements[i]) {
-                if (!~['resolution', 'fps'].indexOf(key)) {
-                    delete requirements[i][key];
-                    log("Cumcake has been loaded!")
-                }
-            }
-        }
-      },
-      onUnload() {
-        log("Cumcake has been un-loaded!")
-          Stream.ApplicationStreamSettingRequirements = this.original;
-      }
+  return {
+    onLoad() {
+      log("Cumcake has been loaded!");
+      stream.ApplicationStreamSettingRequirements = original.map((obj) => {return  {...obj, userPremiumType: 0, guildPremiumTier: 0}});
+    },
+    
+    onUnload() {
+      log("Cumcake has been un-loaded!");
+      stream.ApplicationStreamSettingRequirements = original;
     }
   }
+}
