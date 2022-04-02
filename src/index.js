@@ -8,7 +8,7 @@ export default () => {
   return {
     onLoad() {
       log("Cumcake has been loaded!");
-      stream.ApplicationStreamSettingRequirements = original.map((obj) => {return  {...obj, userPremiumType: 0, guildPremiumTier: 0}});
+      stream.ApplicationStreamSettingRequirements = original.map(obj => {return {resolution: obj.resolution, fps: obj.fps}});
     },
     
     onUnload() {
